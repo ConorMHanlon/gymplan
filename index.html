@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Gym Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--red:#E83A2F;--dark:#0D0D0D;--darker:#080808;--card:#161616;--card2:#1E1E1E;--mid:#888;--light:#C8C8C8;--white:#F5F5F0;--border:#2A2A2A}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--darker);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:rgba(8,8,8,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:var(--red)}
+.nav-tabs{display:flex}
+.nav-tab{padding:0 1rem;height:56px;display:flex;align-items:center;font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;font-weight:500;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.nav-tab:hover{color:var(--white)}
+.nav-tab.active{color:var(--white);border-bottom-color:var(--red)}
+main{padding-top:56px}
+.section{display:none;animation:fadeIn .3s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero{padding:5rem 2rem 3rem;max-width:900px;margin:0 auto;border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:1rem}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,7rem);line-height:.92;letter-spacing:1px;color:var(--white);margin-bottom:1.5rem}
+.hero h1 span{color:var(--red)}
+.hero-sub{font-size:1rem;color:var(--light);max-width:560px;line-height:1.7;font-weight:300}
+.pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+.pill{padding:.35rem .9rem;border:1px solid var(--border);border-radius:999px;font-size:.72rem;letter-spacing:.5px;color:var(--mid);font-weight:400}
+.pill.red{border-color:var(--red);color:var(--red)}
+.gs{max-width:900px;margin:0 auto;padding:3rem 2rem}
+.gs h2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:1px;margin-bottom:1.5rem;color:var(--white)}
+.gs h2 span{color:var(--red)}
+.session-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+@media(max-width:600px){.session-grid{grid-template-columns:1fr}}
+.session-btn{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:4px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s;font-family:inherit;color:inherit}
+.session-btn:hover,.session-btn.active{border-color:var(--red);background:var(--card2)}
+.sb-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:.4rem}
+.sb-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px}
+.sb-sub{font-size:.8rem;color:var(--mid);margin-top:.3rem}
+.exercise-panel{display:none}
+.exercise-panel.active{display:block;animation:fadeIn .3s ease}
+.ex-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:.6rem 1rem;background:var(--red);border-radius:4px 4px 0 0;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:white}
+.ex-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:1rem;border-bottom:1px solid var(--border);background:var(--card);transition:background .15s;align-items:center}
+.ex-row:last-child{border-radius:0 0 4px 4px;border-bottom:none}
+.ex-row:nth-child(even){background:var(--card2)}
+.ex-row:hover{background:#222}
+.ex-name{font-weight:500;font-size:.9rem}
+.ex-tag{display:inline-block;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--red);font-weight:500;margin-top:.15rem}
+.ex-cell{font-size:.82rem;color:var(--light)}
+.ex-cell.hi{color:var(--red);font-weight:500}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--red);line-height:1;min-width:2.5rem;opacity:.8}
+.step-title{font-weight:500;font-size:1rem;margin-bottom:.3rem}
+.step-desc{font-size:.88rem;color:var(--light);line-height:1.7}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+@media(max-width:500px){.pg{grid-template-columns:1fr}}
+.pi{padding:1rem 1.2rem;background:var(--card)}
+.pi:nth-child(even){background:var(--card2)}
+.pi-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:.3rem}
+.pi-value{font-size:.9rem;color:var(--white)}
+.week-bar{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;margin-bottom:2rem}
+.day-block{padding:.8rem .4rem;background:var(--card);border:1px solid var(--border);border-radius:4px;text-align:center}
+.day-block.sess{border-color:var(--red);background:rgba(232,58,47,.08)}
+.day-name{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.day-label{font-size:.72rem;font-weight:500;color:var(--mid)}
+.day-block.sess .day-label{color:var(--red)}
+.nut-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.nut-card{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:4px;border-top:3px solid var(--red)}
+.nut-title{font-weight:600;font-size:.88rem;margin-bottom:.6rem}
+.nut-body{font-size:.82rem;color:var(--light);line-height:1.7}
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.tc{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1.2rem}
+.tc h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;margin-bottom:1rem;color:var(--white)}
+.lr{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem}
+.ll{font-size:.72rem;color:var(--mid);width:80px;flex-shrink:0}
+.li{flex:1;background:var(--card2);border:1px solid var(--border);color:var(--white);padding:.4rem .6rem;font-size:.85rem;border-radius:3px;font-family:inherit;outline:none;transition:border-color .2s}
+.li:focus{border-color:var(--red)}
+.lb{width:100%;margin-top:.8rem;padding:.65rem;background:var(--red);color:white;border:none;border-radius:3px;font-family:inherit;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:opacity .2s}
+.lb:hover{opacity:.85}
+.lh{margin-top:1rem}
+.lh-title{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:.5rem}
+.le{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.le-date{color:var(--mid);font-size:.72rem}
+.le-data{color:var(--light)}
+.le-pb{color:var(--red);font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.empty{font-size:.8rem;color:var(--mid);font-style:italic;padding:.5rem 0}
+.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:999px;font-size:.68rem;font-weight:600;letter-spacing:.5px;margin-left:.4rem}
+.badge.up{background:rgba(232,58,47,.15);color:var(--red);border:1px solid var(--red)}
+.badge.ok{background:rgba(136,136,136,.1);color:var(--mid);border:1px solid var(--border)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--darker)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">GYMPLAN</div>
+  <div class="nav-tabs">
+    
+    <button class="nav-tab active" onclick="show('sessions',this)">Sessions</button>
+    <button class="nav-tab" onclick="show('overload',this)">Overload</button>
+    <button class="nav-tab" onclick="show('tracker',this)">Tracker</button>
+    <button class="nav-tab" onclick="show('nutrition',this)">Tips</button>
+  </div>
+</nav>
+<main>
+
+<!-- SESSIONS -->
+<div id="s-sessions" class="section active">
+  <div class="gs">
+    <h2>THE <span>SESSIONS</span></h2>
+    <div class="session-grid">
+      <button class="session-btn active" onclick="showSession('a',this)">
+        <div class="sb-label">Session A</div>
+        <div class="sb-title">Full Body</div>
+        <div class="sb-sub">Push emphasis &middot; Day 1</div>
+      </button>
+      <button class="session-btn" onclick="showSession('b',this)">
+        <div class="sb-label">Session B</div>
+        <div class="sb-title">Full Body</div>
+        <div class="sb-sub">Pull emphasis &middot; Day 2</div>
+      </button>
+    </div>
+    <div id="panel-a" class="exercise-panel active">
+      <div class="ex-header"><div>Exercise</div><div>Warm-up</div><div>Set 1</div><div>Set 2</div><div>Final Set</div></div>
+      <div class="ex-row"><div><div class="ex-name">Leg Press</div><div class="ex-tag">Machine &middot; Quads / Glutes</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Chest Press</div><div class="ex-tag">Machine &middot; Chest / Triceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Lat Pulldown</div><div class="ex-tag">Machine &middot; Back / Biceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Shoulder Press</div><div class="ex-tag">Machine &middot; Shoulders</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Seated Cable Row</div><div class="ex-tag">Machine &middot; Back / Biceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <p style="margin-top:1rem;font-size:.8rem;color:var(--mid)">Rest 2-3 minutes between every set. No exceptions.</p>
+    </div>
+    <div id="panel-b" class="exercise-panel">
+      <div class="ex-header"><div>Exercise</div><div>Warm-up</div><div>Set 1</div><div>Set 2</div><div>Final Set</div></div>
+      <div class="ex-row"><div><div class="ex-name">Leg Curl</div><div class="ex-tag">Machine &middot; Hamstrings</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Leg Extension</div><div class="ex-tag">Machine &middot; Quads</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Incline Chest Press</div><div class="ex-tag">Machine &middot; Upper Chest</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Pec Deck / Chest Fly</div><div class="ex-tag">Machine &middot; Chest</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <div class="ex-row"><div><div class="ex-name">Cable Tricep Pushdown</div><div class="ex-tag">Cable &middot; Triceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
+      <p style="margin-top:1rem;font-size:.8rem;color:var(--mid)">Rest 2-3 minutes between every set. No exceptions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- OVERLOAD -->
+<div id="s-overload" class="section">
+  <div class="gs">
+    <h2>PROGRESSIVE <span>OVERLOAD</span></h2>
+    <p style="font-size:.9rem;color:var(--light);line-height:1.7;max-width:600px;margin-bottom:2.5rem">If you are not adding weight over time, you are not building muscle. Everything else is secondary.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><div class="step-title">Find your working weight</div><div class="step-desc">Pick a weight where 8 reps is genuinely hard and rep 9 would fail. That is your starting weight for each exercise.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div><div class="step-title">Warm-up set</div><div class="step-desc">10-12 easy reps at ~50% of your working weight. Rest 2 minutes. This primes the muscle without fatiguing it.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div><div class="step-title">Set 1 and Set 2 — 8 reps to near failure</div><div class="step-desc">All sets are taken to near failure — you physically stop at 8 because rep 9 is not possible with good form. Rest 2-3 minutes between each set.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div><div class="step-title">Final set — push to failure</div><div class="step-desc">AMRAP — As Many Reps As Possible. Go until you cannot do another clean rep. Log the number. This is your benchmark.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div><div class="step-title">The progression rule</div><div class="step-desc">If you can complete 8 reps but feel you could physically manage a 9th — the weight is too light. Increase it.<br>The target weight is whatever makes 8 reps genuinely your limit. If a 9th rep is possible, add weight.<br><br><span style="color:var(--red);font-weight:500">Repeat this forever. That is progressive overload.</span></div></div></div>
+      <div class="step"><div class="step-num">6</div><div><div class="step-title">Deload every 6 weeks</div><div class="step-desc">Drop weight by 20% for one full week. Joints and the nervous system need it. You will come back stronger.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TRACKER -->
+<div id="s-tracker" class="section">
+  <div class="gs">
+    <h2>SESSION <span>TRACKER</span></h2>
+    <p style="font-size:.82rem;color:var(--mid);margin-bottom:2rem">Log your AMRAP final set reps and weight. The tracker tells you when to push for 9 or add weight.</p>
+    <div class="tg" id="tracker-grid"></div>
+  </div>
+</div>
+
+<!-- NUTRITION -->
+<div id="s-nutrition" class="section">
+  <div class="gs">
+    <h2>TIPS &amp; <span>STRATEGY</span></h2>
+    <p style="font-size:.9rem;color:var(--light);line-height:1.7;max-width:600px;margin-bottom:2rem">The training is sorted. Here is everything else that will actually move the needle.</p>
+
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;color:var(--white);margin-bottom:1rem">NUTRITION <span style="color:var(--red)">—</span> THE BASICS</h3>
+    <div class="nut-cards" style="margin-bottom:2.5rem">
+      <div class="nut-card">
+        <div class="nut-title">Find your calorie target</div>
+        <div class="nut-body">Multiply your weight in lbs by 14-18 depending on activity. Sedentary desk job = multiply by 14-15. That is your maintenance. Eat 20% below that number to lose fat while keeping muscle. Example: 180 lbs x 15 = 2,700 maintenance. 2,700 x 0.8 = 2,160 kcal target.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Protein — the only macro that truly matters</div>
+        <div class="nut-body">Aim for 0.7-1g per lb of bodyweight daily. At this intake you can build muscle while losing fat simultaneously — body recomposition. Without enough protein, any calorie deficit just eats muscle instead of fat. Chicken, eggs, Greek yoghurt, tuna, cottage cheese, protein shakes.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Change the ratio, not just the quantity</div>
+        <div class="nut-body">Make protein the main event on your plate and carbs the side dish — not the other way around. You do not need to eliminate carbs. Just flip the proportions. This one change alone has a significant impact without requiring calorie counting.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Avoid liquid calories</div>
+        <div class="nut-body">Soda, juice, energy drinks, and fancy coffees can add 500+ kcal without you noticing or feeling full. Switch to water, black coffee, or zero sugar alternatives. This is often the single easiest calorie cut available.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Have 2-3 default meals</div>
+        <div class="nut-body">Pick 2-3 high protein meals you enjoy, calculate their calories once, and rotate them. Decision fatigue kills diets. When you already know what you are eating, you remove the moment of weakness where you reach for something easy and bad.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Do not keep junk in the house</div>
+        <div class="nut-body">You do not need willpower if the food is not there. Willpower is a finite resource — remove it from the equation entirely. If it is not in the fridge, you cannot eat it at 11pm.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;color:var(--white);margin-bottom:1rem">LIFESTYLE <span style="color:var(--red)">—</span> THE MULTIPLIERS</h3>
+    <div class="nut-cards" style="margin-bottom:2.5rem">
+      <div class="nut-card">
+        <div class="nut-title">Sleep — your secret weapon</div>
+        <div class="nut-body">You are getting 7-8 hrs — protect this at all costs. Muscle is built during sleep, not during the workout. Poor sleep raises cortisol, tanks testosterone, kills motivation, and makes you significantly more likely to binge eat the next day. It is not optional.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Walk every day</div>
+        <div class="nut-body">10,000 steps a day is one of the highest return things you can do. It burns calories without spiking hunger the way running does, lowers stress, and improves recovery between sessions. You do not need to go fast. A slow 30-40 minute walk counts.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Stress is making you fat</div>
+        <div class="nut-body">High cortisol from chronic stress drives fat storage, kills testosterone, and triggers binge eating. Managing stress — whether through walking, sleep, reducing commitments, or simply not skipping rest days — is a legitimate fat loss strategy.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">The two-day rule</div>
+        <div class="nut-body">Never miss two sessions or two good eating days in a row. One bad day is totally normal and does not matter. Two in a row starts building a new bad habit in the opposite direction. Get back on it the next day, every time.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:1px;color:var(--white);margin-bottom:1rem">MINDSET <span style="color:var(--red)">—</span> THE LONG GAME</h3>
+    <div class="nut-cards">
+      <div class="nut-card">
+        <div class="nut-title">Identity over goals</div>
+        <div class="nut-body">"I want to lose 10 kg" is a goal. Goals end. "I am someone who takes care of their health" is an identity. Identities do not end. Make decisions based on who you want to be, not what you want to weigh, and the results follow automatically — and stick.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">You can still eat the good stuff</div>
+        <div class="nut-body">Pizza, ice cream, a night out — none of these derail you if your overall week is solid. Proving to yourself that this lifestyle is enjoyable is what keeps you consistent for months and years, not weeks. There are no forbidden foods, only context.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">80% adherence beats 100% perfection</div>
+        <div class="nut-body">The person who is consistent 80% of the time for 6 months will always beat the person who is perfect for 3 weeks and then quits. Lower the bar enough that you can clear it every day. Progress compounds — even slow progress.</div>
+      </div>
+      <div class="nut-card">
+        <div class="nut-title">Sustainability is the strategy</div>
+        <div class="nut-body">The best diet is the one you can actually maintain. The best training plan is the one you actually show up to. If you hate what you are doing, you will not do it for long. Optimise for something you can keep doing indefinitely, not something that gets fast results.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'tracker') renderTracker();
+}
+function showSession(s, btn) {
+  document.querySelectorAll('.session-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.exercise-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + s).classList.add('active');
+}
+
+const exercises = {
+  a: ['Leg Press','Chest Press','Lat Pulldown','Shoulder Press','Seated Cable Row'],
+  b: ['Leg Curl','Leg Extension','Incline Chest Press','Pec Deck Chest Fly','Cable Tricep Pushdown']
+};
+
+function getLogs(ex) {
+  try { return JSON.parse(localStorage.getItem('log_' + ex) || '[]'); } catch(e) { return []; }
+}
+function saveLogs(ex, logs) { localStorage.setItem('log_' + ex, JSON.stringify(logs)); }
+
+function getStatus(ex) {
+  const logs = getLogs(ex);
+  if (logs.length < 1) return null;
+  const last = logs[logs.length - 1];
+  if (last.s1 >= 9 && last.s2 >= 9) return 'addweight';
+  if (last.s1 >= 8 && last.s2 >= 8) return 'try9';
+  return 'keepgoing';
+}
+
+function statusHtml(ex) {
+  const s = getStatus(ex);
+  if (s === 'addweight') return '<span class="badge up">ADD WEIGHT</span>';
+  if (s === 'try9') return '<span class="badge up">TRY 9 REPS</span>';
+  if (s === 'keepgoing') return '<span class="badge ok">Keep Going</span>';
+  return '';
+}
+
+function renderTracker() {
+  const grid = document.getElementById('tracker-grid');
+  grid.innerHTML = '';
+  ['a','b'].forEach(sess => {
+    exercises[sess].forEach(ex => {
+      const logs = getLogs(ex);
+      const maxAmrap = logs.length ? Math.max(...logs.map(l => l.amrap)) : null;
+      const card = document.createElement('div');
+      card.className = 'tc';
+      const lastLog = logs.length ? logs[logs.length-1] : null;
+      const lastWeight = lastLog ? lastLog.weight : '';
+      card.innerHTML =
+        '<h3>' + ex + statusHtml(ex) + '</h3>' +
+        '<div class="lr"><div class="ll">Weight (kg)</div><input class="li" type="number" id="w_' + ex + '" placeholder="e.g. 40" step="2.5" value="' + lastWeight + '"></div>' +
+        '<div class="lr"><div class="ll">Set 1 reps</div><input class="li" type="number" id="s1_' + ex + '" placeholder="e.g. 8" min="1"></div>' +
+        '<div class="lr"><div class="ll">Set 2 reps</div><input class="li" type="number" id="s2_' + ex + '" placeholder="e.g. 8" min="1"></div>' +
+        '<div class="lr"><div class="ll">Final AMRAP</div><input class="li" type="number" id="am_' + ex + '" placeholder="e.g. 12" min="1"></div>' +
+        '<button class="lb" onclick="logSet(\'' + ex + '\')">LOG SESSION</button>' +
+        '<div class="lh"><div class="lh-title">Recent logs</div>' +
+        (logs.length === 0 ? '<div class="empty">No logs yet</div>' :
+          logs.slice(-4).reverse().map((l, i) => {
+            const isPB = maxAmrap !== null && l.amrap === maxAmrap && logs.indexOf(l) === logs.length - 1 - i && logs.length > 1;
+            return '<div class="le"><span class="le-date">' + l.date + '</span><span class="le-data">' + l.weight + 'kg &middot; ' + l.s1 + '/' + l.s2 + ' &middot; AMRAP: ' + l.amrap + '</span>' + (isPB ? '<span class="le-pb">PB</span>' : '') + '</div>';
+          }).join('')
+        ) + '</div>';
+      grid.appendChild(card);
+    });
+  });
+}
+
+function logSet(ex) {
+  const w = parseFloat(document.getElementById('w_' + ex).value);
+  const s1 = parseInt(document.getElementById('s1_' + ex).value);
+  const s2 = parseInt(document.getElementById('s2_' + ex).value);
+  const amrap = parseInt(document.getElementById('am_' + ex).value);
+  if (isNaN(w) || isNaN(s1) || isNaN(s2) || isNaN(amrap)) return;
+  const logs = getLogs(ex);
+  const date = new Date().toLocaleDateString('en-IE', {day:'numeric',month:'short'});
+  logs.push({weight:w, s1, s2, amrap, date});
+  saveLogs(ex, logs);
+  renderTracker();
+}
+</script>
+</body>
+</html>
