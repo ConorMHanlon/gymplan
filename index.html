@@ -9,6 +9,8 @@
 :root{--red:#E83A2F;--dark:#0D0D0D;--darker:#080808;--card:#161616;--card2:#1E1E1E;--mid:#888;--light:#C8C8C8;--white:#F5F5F0;--border:#2A2A2A}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--darker);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;height:56px;background:rgba(8,8,8,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--red);white-space:nowrap;margin-right:0.5rem}
 .nav-tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -16,24 +18,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-tab{padding:0 0.9rem;height:56px;display:flex;align-items:center;font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;font-weight:500;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;white-space:nowrap}
 .nav-tab:hover{color:var(--white)}
 .nav-tab.active{color:var(--white);border-bottom-color:var(--red)}
+
+/* LAYOUT */
 main{padding-top:56px}
 .section{display:none;animation:fadeIn .3s ease}
 .section.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.gs{max-width:900px;margin:0 auto;padding:3rem 2rem}
+.gs{max-width:900px;margin:0 auto;padding:3rem 2rem 7rem}
 .gs h2{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:1px;margin-bottom:1.5rem;color:var(--white)}
 .gs h2 span{color:var(--red)}
+
+/* SESSION BUTTONS */
 .session-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
 @media(max-width:600px){.session-grid{grid-template-columns:1fr}}
 .session-btn{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:4px;cursor:pointer;text-align:left;transition:border-color .2s,background .2s;font-family:inherit;color:inherit}
 .session-btn:hover,.session-btn.active{border-color:var(--red);background:var(--card2)}
 .sb-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:.4rem}
 .sb-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:1px}
-.sb-sub{font-size:.8rem;color:var(--mid);margin-top:.3rem}
+
+/* EXERCISE TABLE */
 .exercise-panel{display:none}
 .exercise-panel.active{display:block;animation:fadeIn .3s ease}
 .ex-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:.6rem 1rem;background:var(--red);border-radius:4px 4px 0 0;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:white}
-.ex-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:1rem;border-bottom:1px solid var(--border);background:var(--card);transition:background .15s;align-items:center}
+.ex-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:1rem;border-bottom:1px solid var(--border);background:var(--card);transition:background .15s;align-items:center;cursor:pointer}
 .ex-row:last-child{border-radius:0 0 4px 4px;border-bottom:none}
 .ex-row:nth-child(even){background:var(--card2)}
 .ex-row:hover{background:#222}
@@ -41,16 +48,25 @@ main{padding-top:56px}
 .ex-tag{display:inline-block;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--red);font-weight:500;margin-top:.15rem}
 .ex-cell{font-size:.82rem;color:var(--light)}
 .ex-cell.hi{color:var(--red);font-weight:500}
+.session-note{margin-top:1rem;font-size:.8rem;color:var(--mid);line-height:1.6}
+.session-note strong{color:var(--light);font-weight:500}
+
+/* OVERLOAD STEPS */
 .steps{display:flex;flex-direction:column}
 .step{display:flex;gap:1.5rem;align-items:flex-start;padding:1.5rem 0;border-bottom:1px solid var(--border)}
 .step:last-child{border-bottom:none}
 .step-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--red);line-height:1;min-width:2.5rem;opacity:.8}
 .step-title{font-weight:500;font-size:1rem;margin-bottom:.3rem}
 .step-desc{font-size:.88rem;color:var(--light);line-height:1.7}
+
+/* TIPS */
 .nut-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
 .nut-card{padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:4px;border-top:3px solid var(--red)}
 .nut-title{font-weight:600;font-size:.88rem;margin-bottom:.6rem}
 .nut-body{font-size:.82rem;color:var(--light);line-height:1.7}
+.sec-heading{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;color:var(--white);margin:2rem 0 1rem}
+
+/* TRACKER */
 .tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
 .tc{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1.2rem}
 .tc h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:1px;margin-bottom:1rem;color:var(--white)}
@@ -70,10 +86,11 @@ main{padding-top:56px}
 .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:999px;font-size:.68rem;font-weight:600;letter-spacing:.5px;margin-left:.4rem}
 .badge.up{background:rgba(232,58,47,.15);color:var(--red);border:1px solid var(--red)}
 .badge.ok{background:rgba(136,136,136,.1);color:var(--mid);border:1px solid var(--border)}
-.sec-heading{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;color:var(--white);margin:2rem 0 1rem}
+
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.open{display:flex}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:6px;max-width:420px;width:100%;padding:2rem;position:relative}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:6px;max-width:420px;width:100%;padding:2rem;position:relative;max-height:90vh;overflow-y:auto}
 .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--mid);font-size:1.2rem;cursor:pointer;line-height:1;padding:0.2rem 0.5rem}
 .modal-close:hover{color:var(--white)}
 .modal-tag{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:.5rem}
@@ -81,7 +98,23 @@ main{padding-top:56px}
 .modal-section{margin-bottom:1rem}
 .modal-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);font-weight:500;margin-bottom:.3rem}
 .modal-value{font-size:.9rem;color:var(--light);line-height:1.6}
-.ex-row{cursor:pointer}
+
+/* REST TIMER — sticky bar at bottom of sessions tab */
+.timer-bar{position:fixed;bottom:0;left:0;right:0;z-index:150;background:rgba(8,8,8,0.97);border-top:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;backdrop-filter:blur(12px)}
+.timer-display{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:2px;color:var(--white);line-height:1;min-width:4rem}
+.timer-display.running{color:var(--red)}
+.timer-display.done{color:#4CAF50}
+.timer-controls{display:flex;gap:.5rem;align-items:center}
+.timer-btn{padding:.5rem 1.1rem;border:1px solid var(--border);border-radius:3px;background:none;color:var(--light);font-family:inherit;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
+.timer-btn:hover{border-color:var(--red);color:var(--white)}
+.timer-btn.primary{background:var(--red);border-color:var(--red);color:white}
+.timer-btn.primary:hover{opacity:.85}
+.timer-label{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);white-space:nowrap}
+.timer-presets{display:flex;gap:.4rem}
+.timer-preset{padding:.4rem .7rem;border:1px solid var(--border);border-radius:3px;background:none;color:var(--mid);font-family:inherit;font-size:.68rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .15s}
+.timer-preset:hover,.timer-preset.active{border-color:var(--red);color:var(--white)}
+
+/* SCROLLBAR */
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--darker)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
@@ -105,37 +138,91 @@ main{padding-top:56px}
 <div id="s-sessions" class="section active">
   <div class="gs">
     <h2>THE <span>SESSIONS</span></h2>
+
     <div class="session-grid">
       <button class="session-btn active" onclick="showSession('a',this)">
         <div class="sb-label">Day 1</div>
-        <div class="sb-title">Push Emphasis</div>
-        
+        <div class="sb-title">Full Body A</div>
       </button>
       <button class="session-btn" onclick="showSession('b',this)">
         <div class="sb-label">Day 2</div>
-        <div class="sb-title">Pull Emphasis</div>
-        
+        <div class="sb-title">Full Body B</div>
       </button>
     </div>
 
+    <!-- DAY 1 -->
     <div id="panel-a" class="exercise-panel active">
-      <div class="ex-header"><div>Exercise</div><div>Warm-up</div><div>Set 1</div><div>Set 2</div><div>Final Set</div></div>
-      <div class="ex-row" onclick="openExercise('Leg Press')"><div><div class="ex-name">Leg Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Quads / Glutes</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row" onclick="openExercise('Chest Press')"><div><div class="ex-name">Chest Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Chest / Triceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row" onclick="openExercise('Lat Pulldown')"><div><div class="ex-name">Lat Pulldown <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Back / Biceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row" onclick="openExercise('Shoulder Press')"><div><div class="ex-name">Shoulder Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Shoulders</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row" onclick="openExercise('Seated Cable Row')"><div><div class="ex-name">Seated Cable Row <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Back / Biceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <p style="margin-top:1rem;font-size:.8rem;color:var(--mid)">Rest 2-3 minutes between every set.</p>
+      <div class="ex-header">
+        <div>Exercise</div><div>Warm-up</div><div>Set 1</div><div>Set 2</div><div>Set 3</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Leg Press')">
+        <div><div class="ex-name">Leg Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Quads / Glutes</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Leg Curl')">
+        <div><div class="ex-name">Leg Curl <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Hamstrings</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Chest Press')">
+        <div><div class="ex-name">Chest Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Chest / Triceps</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Lat Pulldown')">
+        <div><div class="ex-name">Lat Pulldown <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Back / Biceps</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Shoulder Press')">
+        <div><div class="ex-name">Shoulder Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Shoulders / Triceps</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <p class="session-note"><strong>Order matters.</strong> Always do legs first, then push, then pull. Your legs take the most energy. Rest 90 sec to 2 min between every set — use the timer below.</p>
     </div>
 
+    <!-- DAY 2 -->
     <div id="panel-b" class="exercise-panel">
-      <div class="ex-header"><div>Exercise</div><div>Warm-up</div><div>Set 1</div><div>Set 2</div><div>Final Set</div></div>
-      <div class="ex-row" onclick="openExercise('Leg Curl')"><div><div class="ex-name">Leg Curl <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Hamstrings</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row" onclick="openExercise('Leg Extension')"><div><div class="ex-name">Leg Extension <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Quads</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row" onclick="openExercise('Incline Chest Press')"><div><div class="ex-name">Incline Chest Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Machine &middot; Upper Chest</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row"><div><div class="ex-name">Pec Deck / Chest Fly</div><div class="ex-tag">Machine &middot; Chest</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <div class="ex-row" onclick="openExercise('Cable Tricep Pushdown')"><div><div class="ex-name">Cable Tricep Pushdown <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Cable &middot; Triceps</div></div><div class="ex-cell">10-12 @ 50%</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">8 near fail</div><div class="ex-cell hi">AMRAP to failure</div></div>
-      <p style="margin-top:1rem;font-size:.8rem;color:var(--mid)">Rest 2-3 minutes between every set.</p>
+      <div class="ex-header">
+        <div>Exercise</div><div>Warm-up</div><div>Set 1</div><div>Set 2</div><div>Set 3</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Leg Press')">
+        <div><div class="ex-name">Leg Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Quads / Glutes</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Leg Curl')">
+        <div><div class="ex-name">Leg Curl <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Hamstrings</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Incline Chest Press')">
+        <div><div class="ex-name">Incline Chest Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Upper Chest / Triceps</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Seated Cable Row')">
+        <div><div class="ex-name">Seated Cable Row <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Back / Biceps</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <div class="ex-row" onclick="openExercise('Pec Deck Chest Fly')">
+        <div><div class="ex-name">Pec Deck / Chest Fly <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Chest (isolation)</div></div>
+        <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
+      </div>
+      <p class="session-note"><strong>Order matters.</strong> Legs first, then push, then pull. Rest 90 sec to 2 min between every set — use the timer below.</p>
+    </div>
+  </div>
+
+  <!-- REST TIMER -->
+  <div class="timer-bar" id="timer-bar">
+    <div>
+      <div class="timer-label">Rest Timer</div>
+      <div class="timer-display" id="timer-display">2:00</div>
+    </div>
+    <div class="timer-controls">
+      <div>
+        <div class="timer-label" style="margin-bottom:.3rem">Duration</div>
+        <div class="timer-presets">
+          <button class="timer-preset" onclick="setDuration(90)">90s</button>
+          <button class="timer-preset active" onclick="setDuration(120)">2 min</button>
+        </div>
+      </div>
+      <button class="timer-btn primary" id="timer-start-btn" onclick="toggleTimer()">Start</button>
+      <button class="timer-btn" onclick="resetTimer()">Reset</button>
     </div>
   </div>
 </div>
@@ -144,14 +231,50 @@ main{padding-top:56px}
 <div id="s-overload" class="section">
   <div class="gs">
     <h2>PROGRESSIVE <span>OVERLOAD</span></h2>
-    <p style="font-size:.9rem;color:var(--light);line-height:1.7;max-width:600px;margin-bottom:2.5rem">If the weight is not going up over time, the muscle is not growing.</p>
+    <p style="font-size:.9rem;color:var(--light);line-height:1.7;max-width:620px;margin-bottom:2.5rem">The system is simple: work within a rep range, reach the top, add weight. Repeat forever. This is called double progression and it is the most research-backed method for beginners.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div><div class="step-title">Find your starting weight</div><div class="step-desc">For each exercise, pick a weight where 8 reps takes you to near failure. Rep 9 should not be possible with good form.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-title">Warm-up set</div><div class="step-desc">10-12 reps at roughly 50% of your working weight. Easy. Rest 2 minutes before your first working set.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div><div class="step-title">Two working sets of 8</div><div class="step-desc">Both sets go to near failure. You stop at 8 because a 9th rep is not there, not because you chose to stop. Rest 2-3 minutes between sets.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div><div class="step-title">Final set to failure</div><div class="step-desc">Go until you cannot complete another clean rep. Log the number. Next session, try to beat it.</div></div></div>
-      <div class="step"><div class="step-num">5</div><div><div class="step-title">When to increase weight</div><div class="step-desc">If you complete both working sets and feel a 9th rep was possible, the weight is too light. Add the smallest increment available next session and repeat.</div></div></div>
-      <div class="step"><div class="step-num">6</div><div><div class="step-title">Deload every 6 weeks</div><div class="step-desc">Drop all weights by 20% for one week, then push again. Keeps joints healthy and usually leads to a stronger return.</div></div></div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Pick your starting weight</div>
+          <div class="step-desc">Choose a weight where you can do 8 clean reps but a 9th would be a real struggle. If you can breeze past 12, it is too light. If you cannot reach 8 with good form, it is too heavy.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Warm-up set</div>
+          <div class="step-desc">10 reps at roughly 50% of your working weight. Easy. This primes the muscle and the movement pattern without tiring you out. Rest 60 seconds, then begin.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">3 working sets of 8-12 reps</div>
+          <div class="step-desc">Use the same weight for all 3 sets. Stop each set 1-2 reps before you would genuinely fail — meaning you could have done one more rep, but you chose not to. This is the correct intensity. Going all the way to failure every set adds unnecessary fatigue without meaningfully more growth. Rest 90 seconds to 2 minutes between sets.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Log your reps</div>
+          <div class="step-desc">Note what you got on each set in the Tracker tab. Your reps will naturally drop across sets — that is normal. Getting 12, 10, 9 is fine. Getting 12, 12, 12 means the weight is too light.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div>
+          <div class="step-title">When to add weight</div>
+          <div class="step-desc">When you hit 12 reps on all 3 working sets in the same session, add the smallest weight increment your gym has next time. Usually 2.5 kg on machines. Start back at 8 reps with the new weight and work back up to 12. That is one full cycle.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div>
+          <div class="step-title">Deload every 6-8 weeks</div>
+          <div class="step-desc">Drop all weights by about 20% for one week and keep the same sets and reps. This lets your joints and nervous system recover from accumulated fatigue. You will almost always come back stronger the following week.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -160,7 +283,7 @@ main{padding-top:56px}
 <div id="s-tracker" class="section">
   <div class="gs">
     <h2>SESSION <span>TRACKER</span></h2>
-    <p style="font-size:.82rem;color:var(--mid);margin-bottom:2rem">Log your sets each session. The tracker tells you when to push for 9 or add weight.</p>
+    <p style="font-size:.82rem;color:var(--mid);margin-bottom:2rem">Log your 3 working sets each session. When you hit 12 reps on all 3, add weight next time.</p>
     <div class="tg" id="tracker-grid"></div>
   </div>
 </div>
@@ -236,6 +359,7 @@ main{padding-top:56px}
   </div>
 </div>
 
+</main>
 
 <!-- EXERCISE MODAL -->
 <div class="modal-overlay" id="ex-modal" onclick="closeModal(event)">
@@ -257,9 +381,10 @@ main{padding-top:56px}
     </div>
   </div>
 </div>
-</main>
 
 <script>
+
+/* ---- NAV ---- */
 function show(id, btn) {
   document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
   document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
@@ -275,32 +400,86 @@ function showSession(s, btn) {
   document.getElementById('panel-' + s).classList.add('active');
 }
 
+/* ---- REST TIMER ---- */
+var timerDuration = 120;
+var timerRemaining = 120;
+var timerInterval = null;
+var timerRunning = false;
+var timerFinishTimeout = null;
+
+function setDuration(secs) {
+  document.querySelectorAll('.timer-preset').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+  timerDuration = secs;
+  if (!timerRunning) {
+    timerRemaining = secs;
+    updateTimerDisplay();
+  }
+}
+
+function updateTimerDisplay() {
+  var m = Math.floor(timerRemaining / 60);
+  var s = timerRemaining % 60;
+  var display = document.getElementById('timer-display');
+  display.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  display.className = 'timer-display';
+  if (timerRunning && timerRemaining > 0) display.classList.add('running');
+  if (timerRemaining === 0) display.classList.add('done');
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timer-start-btn').textContent = 'Start';
+    document.getElementById('timer-display').classList.remove('running');
+  } else {
+    if (timerRemaining === 0) timerRemaining = timerDuration;
+    timerRunning = true;
+    document.getElementById('timer-start-btn').textContent = 'Pause';
+    timerInterval = setInterval(function() {
+      timerRemaining--;
+      updateTimerDisplay();
+      if (timerRemaining === 0) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('timer-start-btn').textContent = 'Start';
+        if ('vibrate' in navigator) navigator.vibrate([200, 100, 200]);
+      }
+    }, 1000);
+  }
+}
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerRemaining = timerDuration;
+  document.getElementById('timer-start-btn').textContent = 'Start';
+  updateTimerDisplay();
+}
+
+/* ---- TRACKER ---- */
 var exercises = {
-  a: ['Leg Press','Chest Press','Lat Pulldown','Shoulder Press','Seated Cable Row'],
-  b: ['Leg Curl','Leg Extension','Incline Chest Press','Pec Deck Chest Fly','Cable Tricep Pushdown']
+  a: ['Leg Press','Leg Curl','Chest Press','Lat Pulldown','Shoulder Press'],
+  b: ['Leg Press','Leg Curl','Incline Chest Press','Seated Cable Row','Pec Deck Chest Fly']
 };
 
 function getLogs(ex) {
   try { return JSON.parse(localStorage.getItem('log_' + ex) || '[]'); } catch(e) { return []; }
 }
-
-function saveLogs(ex, logs) {
-  localStorage.setItem('log_' + ex, JSON.stringify(logs));
-}
+function saveLogs(ex, logs) { localStorage.setItem('log_' + ex, JSON.stringify(logs)); }
 
 function getStatus(ex) {
   var logs = getLogs(ex);
-  if (logs.length < 1) return null;
+  if (!logs.length) return null;
   var last = logs[logs.length - 1];
-  if (last.s1 >= 9 && last.s2 >= 9) return 'addweight';
-  if (last.s1 >= 8 && last.s2 >= 8) return 'try9';
+  if (last.s1 >= 12 && last.s2 >= 12 && last.s3 >= 12) return 'addweight';
   return 'keepgoing';
 }
 
 function statusHtml(ex) {
   var s = getStatus(ex);
   if (s === 'addweight') return '<span class="badge up">ADD WEIGHT</span>';
-  if (s === 'try9') return '<span class="badge up">TRY 9 REPS</span>';
   if (s === 'keepgoing') return '<span class="badge ok">Keep Going</span>';
   return '';
 }
@@ -308,114 +487,105 @@ function statusHtml(ex) {
 function renderTracker() {
   var grid = document.getElementById('tracker-grid');
   grid.innerHTML = '';
+  var seen = [];
   ['a','b'].forEach(function(sess) {
     exercises[sess].forEach(function(ex) {
+      if (seen.indexOf(ex) !== -1) return;
+      seen.push(ex);
       var logs = getLogs(ex);
-      var maxAmrap = logs.length ? Math.max.apply(null, logs.map(function(l){ return l.amrap; })) : null;
+      var maxS3 = logs.length ? Math.max.apply(null, logs.map(function(l){ return l.s3 || 0; })) : null;
       var lastLog = logs.length ? logs[logs.length-1] : null;
       var lastWeight = lastLog ? lastLog.weight : '';
-      var card = document.createElement('div');
-      card.className = 'tc';
 
       var historyHtml = '';
-      if (logs.length === 0) {
+      if (!logs.length) {
         historyHtml = '<div class="empty">No logs yet</div>';
       } else {
         var recent = logs.slice(-4).reverse();
         for (var i = 0; i < recent.length; i++) {
           var l = recent[i];
-          var isPB = maxAmrap !== null && l.amrap === maxAmrap && i === 0 && logs.length > 1;
-          historyHtml += '<div class="le"><span class="le-date">' + l.date + '</span><span class="le-data">' + l.weight + 'kg &middot; ' + l.s1 + '/' + l.s2 + ' &middot; AMRAP: ' + l.amrap + '</span>' + (isPB ? '<span class="le-pb">PB</span>' : '') + '</div>';
+          var isPB = maxS3 !== null && l.s3 === maxS3 && i === 0 && logs.length > 1;
+          historyHtml += '<div class="le"><span class="le-date">' + l.date + '</span><span class="le-data">' + l.weight + 'kg &middot; ' + l.s1 + ' / ' + l.s2 + ' / ' + l.s3 + ' reps</span>' + (isPB ? '<span class="le-pb">PB</span>' : '') + '</div>';
         }
       }
 
+      var card = document.createElement('div');
+      card.className = 'tc';
       card.innerHTML =
         '<h3>' + ex + statusHtml(ex) + '</h3>' +
         '<div class="lr"><div class="ll">Weight (kg)</div><input class="li" type="number" id="w_' + ex + '" placeholder="e.g. 40" step="2.5" value="' + lastWeight + '"></div>' +
-        '<div class="lr"><div class="ll">Set 1 reps</div><input class="li" type="number" id="s1_' + ex + '" placeholder="e.g. 8" min="1"></div>' +
-        '<div class="lr"><div class="ll">Set 2 reps</div><input class="li" type="number" id="s2_' + ex + '" placeholder="e.g. 8" min="1"></div>' +
-        '<div class="lr"><div class="ll">Final AMRAP</div><input class="li" type="number" id="am_' + ex + '" placeholder="e.g. 12" min="1"></div>' +
-        '<button class="lb" onclick="logSet(\'' + ex + '\')">LOG SESSION</button>' +
+        '<div class="lr"><div class="ll">Set 1 reps</div><input class="li" type="number" id="s1_' + ex + '" placeholder="8-12" min="1" max="20"></div>' +
+        '<div class="lr"><div class="ll">Set 2 reps</div><input class="li" type="number" id="s2_' + ex + '" placeholder="8-12" min="1" max="20"></div>' +
+        '<div class="lr"><div class="ll">Set 3 reps</div><input class="li" type="number" id="s3_' + ex + '" placeholder="8-12" min="1" max="20"></div>' +
+        '<button class="lb" onclick="logSet(\'' + ex + '\')">Log Session</button>' +
         '<div class="lh"><div class="lh-title">Recent logs</div>' + historyHtml + '</div>';
-
       grid.appendChild(card);
     });
   });
 }
 
 function logSet(ex) {
-  var w = parseFloat(document.getElementById('w_' + ex).value);
+  var w  = parseFloat(document.getElementById('w_'  + ex).value);
   var s1 = parseInt(document.getElementById('s1_' + ex).value);
   var s2 = parseInt(document.getElementById('s2_' + ex).value);
-  var amrap = parseInt(document.getElementById('am_' + ex).value);
-  if (isNaN(w) || isNaN(s1) || isNaN(s2) || isNaN(amrap)) return;
+  var s3 = parseInt(document.getElementById('s3_' + ex).value);
+  if (isNaN(w) || isNaN(s1) || isNaN(s2) || isNaN(s3)) return;
   var logs = getLogs(ex);
   var date = new Date().toLocaleDateString('en-IE', {day:'numeric', month:'short'});
-  logs.push({weight: w, s1: s1, s2: s2, amrap: amrap, date: date});
+  logs.push({weight:w, s1:s1, s2:s2, s3:s3, date:date});
   saveLogs(ex, logs);
   renderTracker();
 }
 
+/* ---- EXERCISE MODAL ---- */
 var exerciseInfo = {
   'Leg Press': {
     muscle: 'Quads / Glutes',
-    machine: 'Leg press machine — usually a large inclined sled with a platform for your feet.',
-    setup: 'Sit back fully into the seat. Place feet mid-platform, shoulder-width apart. Adjust the seat so your knees are at roughly 90 degrees when the platform is loaded. Unlock the safety handles before pressing.',
-    feel: 'Your quads and glutes doing the pushing. Knees should track over your toes. Do not let them cave inward.'
-  },
-  'Chest Press': {
-    muscle: 'Chest / Triceps',
-    machine: 'Chest press machine — a seated station with two handles that push forward.',
-    setup: 'Adjust the seat so the handles are at mid-chest height. Sit back fully, feet flat on the floor. Grip the handles with palms facing down or neutral depending on the machine.',
-    feel: 'Your chest doing the work, not your shoulders. If you feel it mostly in your shoulders, lower the seat slightly.'
-  },
-  'Lat Pulldown': {
-    muscle: 'Back / Biceps',
-    machine: 'Lat pulldown machine — a cable station with a long bar overhead and a padded knee brace.',
-    setup: 'Lock your knees under the pad so you do not lift off the seat. Grip the bar wide, just outside shoulder-width. Lean back slightly, about 10 to 15 degrees.',
-    feel: 'Your elbows pulling down toward your hips. Think about squeezing your shoulder blades together at the bottom of each rep.'
-  },
-  'Shoulder Press': {
-    muscle: 'Shoulders',
-    machine: 'Shoulder press machine — a seated station with handles at shoulder height that press upward.',
-    setup: 'Adjust the seat so the handles start at roughly shoulder height. Sit upright, back against the pad. Grip handles with palms facing forward.',
-    feel: 'Your shoulders doing the pressing. Keep your core braced and avoid arching your lower back as you push.'
-  },
-  'Seated Cable Row': {
-    muscle: 'Back / Biceps',
-    machine: 'Cable row machine — a low cable pulley with a bench and foot platform. Use a close-grip V-bar attachment.',
-    setup: 'Sit upright with a slight lean forward. Feet on the platform, knees slightly bent. Grip the handle and sit tall before you begin pulling.',
-    feel: 'Your shoulder blades squeezing together as you pull the handle to your lower chest. Pause briefly at the peak and resist the urge to lean back excessively.'
+    machine: 'Leg press machine — a large inclined sled with a platform for your feet. Usually in the cable/machine section.',
+    setup: 'Sit back fully into the seat. Place feet mid-platform, shoulder-width apart, toes slightly out. Adjust so your knees are at roughly 90 degrees when loaded. Unlock the safety handles before pressing.',
+    feel: 'Your quads and glutes doing the pushing. Knees track over your toes — do not let them cave inward. Full range: lower until knees reach 90 degrees, press without locking out completely.'
   },
   'Leg Curl': {
     muscle: 'Hamstrings',
-    machine: 'Leg curl machine — either lying flat or seated, with a padded roller that goes behind your ankles.',
-    setup: 'Adjust so the padded roller sits just above your heels, not behind the knee. If seated, make sure your knees align with the pivot point of the machine.',
-    feel: 'Your hamstrings curling your heel toward your body. Slow and controlled on the way back down.'
+    machine: 'Leg curl machine — either lying flat or seated, with a padded roller that sits behind your ankles.',
+    setup: 'Adjust so the padded roller sits just above your heels, not behind the knee. If seated, align your knees with the machine pivot point.',
+    feel: 'Your hamstrings pulling your heel toward your body. Slow and controlled on the way back down — do not let it snap back.'
   },
-  'Leg Extension': {
-    muscle: 'Quads',
-    machine: 'Leg extension machine — a seated chair with a padded roller across the front of your shins.',
-    setup: 'Adjust the seat back so your knees align with the machine pivot. The pad should sit just above your ankles, not on your feet.',
-    feel: 'Your quads contracting as you extend. Hold briefly at the top. Do not let the weight crash back down.'
+  'Chest Press': {
+    muscle: 'Chest / Triceps',
+    machine: 'Chest press machine — a seated station with two handles that push forward at chest height.',
+    setup: 'Adjust the seat so the handles are at mid-chest height. Sit back fully, feet flat on the floor. Grip the handles with a firm, neutral grip.',
+    feel: 'Your chest doing the work, not your shoulders. If you feel it mostly in your shoulders, lower the seat slightly. Full press out without locking elbows, controlled return.'
+  },
+  'Lat Pulldown': {
+    muscle: 'Back / Biceps',
+    machine: 'Lat pulldown machine — a cable station with a long bar overhead and a padded knee brace to keep you anchored.',
+    setup: 'Lock your knees under the pad firmly. Grip the bar just outside shoulder-width. Lean back slightly — about 10 to 15 degrees. Pull the bar to your upper chest.',
+    feel: 'Your elbows pulling down toward your hips, shoulder blades squeezing together at the bottom. Think about driving your elbows into your back pockets.'
+  },
+  'Shoulder Press': {
+    muscle: 'Shoulders / Triceps',
+    machine: 'Shoulder press machine — a seated station with handles that press upward from shoulder height.',
+    setup: 'Adjust the seat so the handles start at roughly shoulder height. Sit upright, back fully against the pad. Grip handles with palms facing forward or neutral.',
+    feel: 'Your shoulders pressing upward. Keep your core braced and avoid arching your lower back as you push. Stop just short of full lockout at the top.'
   },
   'Incline Chest Press': {
-    muscle: 'Upper Chest',
-    machine: 'Incline chest press machine — same as the flat chest press but the seat and backrest are angled back, or the machine is specifically labelled incline.',
-    setup: 'Adjust so the handles are at upper chest height. Sit back into the pad. If the gym only has a flat chest press, this exercise can be swapped for a second set on that.',
-    feel: 'The upper portion of your chest working harder than the flat press. If you feel it only in your shoulders, lower the seat slightly.'
+    muscle: 'Upper Chest / Triceps',
+    machine: 'Incline chest press machine — same layout as the flat chest press but the backrest is angled, targeting the upper chest more.',
+    setup: 'Adjust so the handles sit at upper chest height when seated. Sit back fully into the pad. If your gym only has a flat press, use that — it is a fine substitute.',
+    feel: 'The upper portion of your chest working harder than the flat version. If you feel it only in your shoulders, lower the seat slightly.'
+  },
+  'Seated Cable Row': {
+    muscle: 'Back / Biceps',
+    machine: 'Cable row machine — a low cable pulley with a bench and foot platform. Use a close-grip V-bar attachment if available.',
+    setup: 'Sit upright with a very slight forward lean. Feet on the platform, knees slightly bent. Grip the handle and sit tall before pulling.',
+    feel: 'Your shoulder blades squeezing together as you pull to your lower chest. Brief pause at the peak. Resist the urge to lean back excessively — the movement is in the arms and back, not the torso.'
   },
   'Pec Deck Chest Fly': {
-    muscle: 'Chest',
+    muscle: 'Chest (isolation)',
     machine: 'Pec deck machine — a seated station where you grip two padded arms or handles out to your sides and bring them together in front of you.',
-    setup: 'Adjust the seat so your elbows are at shoulder height when the arms are open. Sit upright with your back fully against the pad.',
-    feel: 'A stretch across your chest as the arms open, and a strong squeeze when they close in front of you. This is an isolation exercise so the weight will be lighter than the press.'
-  },
-  'Cable Tricep Pushdown': {
-    muscle: 'Triceps',
-    machine: 'Cable machine — any cable station with a high pulley. Use a straight bar or rope attachment.',
-    setup: 'Stand facing the cable with feet shoulder-width apart. Grip the bar with palms down, elbows tucked close to your sides. Keep elbows locked in that position throughout.',
-    feel: 'Your triceps extending your arms downward. Only your forearms should move. If your elbows are swinging, reduce the weight.'
+    setup: 'Adjust the seat so your elbows are at shoulder height when the arms are open. Sit upright, back fully against the pad.',
+    feel: 'A strong stretch across your chest as the arms open, and a firm squeeze when they close. Lighter than the press — this is an isolation move. Do not use momentum.'
   }
 };
 
@@ -437,6 +607,5 @@ function closeModal(e) {
 }
 
 </script>
-
 </body>
 </html>
