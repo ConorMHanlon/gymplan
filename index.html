@@ -175,7 +175,11 @@ main{padding-top:56px}
         <div><div class="ex-name">Shoulder Press <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Shoulders / Triceps</div></div>
         <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
       </div>
-      <p class="session-note"><strong>Order matters.</strong> Always do legs first, then push, then pull. Your legs take the most energy. Rest 90 sec to 2 min between every set — use the timer below.</p>
+      <div class="ex-row" onclick="openExercise('Bicep Curl')">
+        <div><div class="ex-name">Bicep Curl <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Biceps (isolation)</div></div>
+        <div class="ex-cell">—</div><div class="ex-cell hi">10-15</div><div class="ex-cell hi">10-15</div><div class="ex-cell hi">10-15</div>
+      </div>
+      <p class="session-note"><strong>Order matters.</strong> Always do legs first, then push, then pull, then isolation. Rest 90 sec to 2 min between every set — use the timer below.</p>
     </div>
 
     <!-- DAY 2 -->
@@ -203,7 +207,11 @@ main{padding-top:56px}
         <div><div class="ex-name">Pec Deck / Chest Fly <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Chest (isolation)</div></div>
         <div class="ex-cell">10 @ 50%</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div><div class="ex-cell hi">8-12</div>
       </div>
-      <p class="session-note"><strong>Order matters.</strong> Legs first, then push, then pull. Rest 90 sec to 2 min between every set — use the timer below.</p>
+      <div class="ex-row" onclick="openExercise('Lateral Raise')">
+        <div><div class="ex-name">Lateral Raise <span style="font-size:.65rem;color:var(--mid);font-weight:300">tap for info</span></div><div class="ex-tag">Shoulders (isolation)</div></div>
+        <div class="ex-cell">—</div><div class="ex-cell hi">12-15</div><div class="ex-cell hi">12-15</div><div class="ex-cell hi">12-15</div>
+      </div>
+      <p class="session-note"><strong>Order matters.</strong> Legs first, then push, then pull, then isolation. Rest 90 sec to 2 min between every set — use the timer below.</p>
     </div>
   </div>
 
@@ -231,7 +239,7 @@ main{padding-top:56px}
 <div id="s-overload" class="section">
   <div class="gs">
     <h2>PROGRESSIVE <span>OVERLOAD</span></h2>
-    <p style="font-size:.9rem;color:var(--light);line-height:1.7;max-width:620px;margin-bottom:2.5rem">The system is simple: work within a rep range, reach the top, add weight. Repeat forever. This is called double progression and it is the most research-backed method for beginners.</p>
+    <p style="font-size:.9rem;color:var(--light);line-height:1.7;max-width:620px;margin-bottom:2.5rem">The system is simple: work within a rep range, reach the top, add weight. Repeat forever. This is called double progression and it is the most research-backed method for beginners. Compound exercises use 8-12 reps. Isolation exercises (curls, lateral raises) use higher ranges as noted on the session page.</p>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
@@ -297,11 +305,11 @@ main{padding-top:56px}
     <div class="nut-cards" style="margin-bottom:2.5rem">
       <div class="nut-card">
         <div class="nut-title">Calories</div>
-        <div class="nut-body">Weight in lbs x 14 (sedentary) = maintenance. Eat 20% below that to lose fat. Example: 160 lbs x 14 = 2,240. Target: 1,790 kcal.</div>
+        <div class="nut-body">Weight in lbs x 14 (sedentary) = maintenance. Eat 500 kcal below that to lose fat. Example: 190 lbs x 14 = 2,660. Target: ~2,160 kcal.</div>
       </div>
       <div class="nut-card">
         <div class="nut-title">Protein</div>
-        <div class="nut-body">0.7 to 1g per lb of bodyweight per day. Without it, a calorie deficit burns muscle instead of fat. Chicken, eggs, Greek yoghurt, tuna, cottage cheese, protein shakes.</div>
+        <div class="nut-body">0.7 to 1g per lb of bodyweight per day. Without it, a calorie deficit burns muscle instead of fat. Target: 140 to 160g daily. Chicken, eggs, Greek yoghurt, tuna, cottage cheese, protein shakes.</div>
       </div>
       <div class="nut-card">
         <div class="nut-title">Flip your plate</div>
@@ -460,8 +468,8 @@ function resetTimer() {
 
 /* ---- TRACKER ---- */
 var exercises = {
-  a: ['Leg Press','Leg Curl','Chest Press','Lat Pulldown','Shoulder Press'],
-  b: ['Leg Press','Leg Curl','Incline Chest Press','Seated Cable Row','Pec Deck Chest Fly']
+  a: ['Leg Press','Leg Curl','Chest Press','Lat Pulldown','Shoulder Press','Bicep Curl'],
+  b: ['Leg Press','Leg Curl','Incline Chest Press','Seated Cable Row','Pec Deck Chest Fly','Lateral Raise']
 };
 
 function getLogs(ex) {
@@ -473,7 +481,8 @@ function getStatus(ex) {
   var logs = getLogs(ex);
   if (!logs.length) return null;
   var last = logs[logs.length - 1];
-  if (last.s1 >= 12 && last.s2 >= 12 && last.s3 >= 12) return 'addweight';
+  var threshold = (ex === 'Lateral Raise' || ex === 'Bicep Curl') ? 15 : 12;
+  if (last.s1 >= threshold && last.s2 >= threshold && last.s3 >= threshold) return 'addweight';
   return 'keepgoing';
 }
 
@@ -586,6 +595,18 @@ var exerciseInfo = {
     machine: 'Pec deck machine — a seated station where you grip two padded arms or handles out to your sides and bring them together in front of you.',
     setup: 'Adjust the seat so your elbows are at shoulder height when the arms are open. Sit upright, back fully against the pad.',
     feel: 'A strong stretch across your chest as the arms open, and a firm squeeze when they close. Lighter than the press — this is an isolation move. Do not use momentum.'
+  },
+  'Lateral Raise': {
+    muscle: 'Shoulders (isolation)',
+    machine: 'Dumbbells or a lateral raise machine. If using dumbbells, stand upright with one in each hand at your sides. If your gym has a lateral raise machine, use that — it controls the movement path for you.',
+    setup: 'Stand with feet shoulder-width apart, slight bend in the elbows. If using a machine, adjust the seat so the pads sit on your outer arms just above the elbow.',
+    feel: 'The side of your shoulders doing the lifting. Raise to shoulder height — no higher. Control the descent, do not just drop the weight. Use a lighter weight than you think you need. If you find yourself swinging or shrugging, go lighter.'
+  },
+  'Bicep Curl': {
+    muscle: 'Biceps (isolation)',
+    machine: 'Dumbbells, a cable machine with a straight or EZ bar, or a bicep curl machine. Any of these work. If using dumbbells, you can do both arms together or alternate.',
+    setup: 'Stand upright or sit on a bench. Keep your upper arms pinned to your sides throughout the movement. If using a machine, adjust the seat so your elbows align with the pivot point.',
+    feel: 'Your biceps contracting as you curl the weight up. If your elbows drift forward or your back arches, the weight is too heavy. Full extension at the bottom, full squeeze at the top.'
   }
 };
 
